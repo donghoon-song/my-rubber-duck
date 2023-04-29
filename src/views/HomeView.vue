@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {supabase} from "@/utils/supabase";
 
 const dialog = ref(false);
 const topic = ref('');
+const isLoading = ref(false);
+
+const TEMPORARY_USER_ID = 1;
 
 function openDialog() {
     dialog.value = true;
@@ -24,6 +28,48 @@ function validateTopic() {
     return required(topic.value)
 }
 
+function startLoading() {
+    isLoading.value = true;
+}
+
+function finishLoading() {
+    isLoading.value = false;
+}
+
+async function createNewChat(topic: string, userId: Number) {
+    try {
+        startLoading();
+        if (!topic) {
+            throw new Error('토픽은 비어 있을 수 없습니다.')
+        }
+        if (topic.length > 255) {
+            throw new Error('토픽이 너무 깁니다.')
+        }
+        const {data, error} = await supabase.from("Chat").insert([
+            {
+                topic: topic,
+                user_id: userId
+            }
+        ]);
+        if (error) {
+            throw new Error('채팅을 생성하지 못했습니다. 다시 시도해주세요.');
+        }
+    } catch (error) {
+        console.error(error)
+        throw error;
+    } finally {
+        finishLoading();
+    }
+}
+
+async function handleClickStartChatButton() {
+    try {
+        await createNewChat(topic.value, TEMPORARY_USER_ID);
+        closeDialog()
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 </script>
 
@@ -51,13 +97,16 @@ function validateTopic() {
                     </v-card-text>
                     <v-text-field
                             v-model="topic"
-                            :readonly="loading"
+                            :readonly="isLoading"
                             class="mb-2"
                             clearable
                             placeholder="어떤 이야기를 들려주고 싶으신가요?"
                     ></v-text-field>
                     <v-card-actions>
-                        <v-btn color="primary" block :disabled="!validateTopic()">대화 시작하기</v-btn>
+                        <v-btn color="primary" block :loading="isLoading" :disabled="!validateTopic()"
+                               @click="handleClickStartChatButton">대화
+                            시작하기
+                        </v-btn>
                     </v-card-actions>
                     <v-card-actions>
                         <v-btn color="primary" block @click="closeDialog">닫기</v-btn>
