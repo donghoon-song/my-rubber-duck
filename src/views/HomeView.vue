@@ -45,7 +45,7 @@ async function createNewChat(topic: string, userId: Number) {
         if (topic.length > 255) {
             throw new Error('토픽이 너무 깁니다.')
         }
-        const {data, error} = await supabase.from("Chat").insert([
+        const {data, error} = await supabase.from("chat").insert([
             {
                 topic: topic,
                 user_id: userId
