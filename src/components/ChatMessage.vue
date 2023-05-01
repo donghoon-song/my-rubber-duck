@@ -1,7 +1,5 @@
 <template>
-  <div class="bg-[#00ced1] rounded-xl py-1 px-2 text-white">
-    {{ content }}
-  </div>
+  <div class="bg-[#00ced1] rounded-xl py-1 px-3 text-white" v-html="content"></div>
 </template>
 
 <script setup lang="ts">
