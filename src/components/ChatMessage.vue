@@ -10,7 +10,7 @@ import type { Message } from '@/types/message'
 // TODO : String as () => Pick<Message, 'content'>이 왜 안되는지 알아보기
 defineProps({
   content: {
-    type: String as unknown as () => Pick<Message, 'content'>,
+    type: String,
     required: true
   }
 })
