@@ -1,6 +1,8 @@
 <template>
   <div class="max-h-screen">
-    <div><v-btn icon="mdi-arrow-left" variant="plain" /></div>
+    <div class="mt-4">
+      <v-btn icon="mdi-arrow-left" variant="flat" density="compact" @click="router.push('/')" />
+    </div>
     <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
       <div v-for="message in messages" :key="message.id">
         <message-row
@@ -26,10 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/utils/supabase'
 import MessageRow from '@/components/MessageRow.vue'
+
+const router = useRouter()
 
 const mockUserId = 1
 const mockRubberDuckUserId = 2
