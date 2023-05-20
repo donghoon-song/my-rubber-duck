@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { supabase } from '@/utils/supabase'
+import { useAuthStore } from '@/stores/auth'
 
 const dialog = ref(false)
 const topic = ref('')
 const isLoading = ref(false)
 
-const TEMPORARY_USER_ID = 1
+const auth = useAuthStore()
 
 function handleClickStartNewChatButton() {
   openDialog()
@@ -14,7 +15,7 @@ function handleClickStartNewChatButton() {
 
 async function handleClickStartChatButton() {
   try {
-    await createNewChat(topic.value, TEMPORARY_USER_ID)
+    await createNewChat(topic.value, auth.getUserInfo.id)
     closeDialog()
   } catch (error) {
     console.error(error)
@@ -45,7 +46,7 @@ function finishLoading() {
   isLoading.value = false
 }
 
-async function createNewChat(topic: string, userId: Number) {
+async function createNewChat(topic: string, userId: string) {
   try {
     startLoading()
     if (!topic) {
