@@ -81,9 +81,7 @@ async function createNewChat(topic: string, userId: string) {
     >
       새로운 대화 시작
     </button>
-    <button class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4">
-      대화 목록
-    </button>
+
     <v-dialog v-model="dialog" width="auto">
       <v-card>
         <v-card-text> 고무오리에게 들려줄 주제를 입력해주세요. </v-card-text>
