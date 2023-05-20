@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { supabase } from '@/utils/supabase'
+import { useAuthStore } from '@/stores/auth'
 
 const dialog = ref(false)
 const topic = ref('')
 const isLoading = ref(false)
 
-const TEMPORARY_USER_ID = 1
+const auth = useAuthStore()
 
 function handleClickStartNewChatButton() {
   openDialog()
@@ -14,7 +15,7 @@ function handleClickStartNewChatButton() {
 
 async function handleClickStartChatButton() {
   try {
-    await createNewChat(topic.value, TEMPORARY_USER_ID)
+    await createNewChat(topic.value, auth.getUserInfo.id)
     closeDialog()
   } catch (error) {
     console.error(error)
@@ -45,7 +46,7 @@ function finishLoading() {
   isLoading.value = false
 }
 
-async function createNewChat(topic: string, userId: Number) {
+async function createNewChat(topic: string, userId: string) {
   try {
     startLoading()
     if (!topic) {
@@ -80,9 +81,7 @@ async function createNewChat(topic: string, userId: Number) {
     >
       새로운 대화 시작
     </button>
-    <button class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4">
-      대화 목록
-    </button>
+
     <v-dialog v-model="dialog" width="auto">
       <v-card>
         <v-card-text> 고무오리에게 들려줄 주제를 입력해주세요. </v-card-text>
