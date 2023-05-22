@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { supabase } from '@/utils/supabase'
+import { IMAGE_URL } from '@/utils/constants/image.js'
 
 async function googleSignIn() {
   try {
@@ -31,11 +32,7 @@ async function handleClickLoginButton() {
 <template>
   <div>
     <h1 class="home-title">Quack Chat</h1>
-    <img
-      class="mt-2"
-      src="https://drpdbryplxlouwfdwkvh.supabase.co/storage/v1/object/public/assets/public/main-rubber-duck.png"
-      alt="main-rubber-duck image"
-    />
+    <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK" alt="main-rubber-duck image" />
 
     <button
       class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4"
