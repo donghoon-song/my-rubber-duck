@@ -2,12 +2,28 @@
 import { ref } from 'vue'
 import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/stores/auth'
+import { onMounted } from 'vue'
+import ChatListItem from '@/components/ChatListItem.vue'
 
 const dialog = ref(false)
 const topic = ref('')
 const isLoading = ref(false)
+const chatList = ref<any>([])
 
 const auth = useAuthStore()
+
+onMounted(() => {
+  fetchChatList()
+})
+
+async function fetchChatList() {
+  try {
+    const { data } = await supabase.from('chat').select(`id, topic, user_id`)
+    chatList.value = data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 function handleClickStartNewChatButton() {
   openDialog()
@@ -15,6 +31,9 @@ function handleClickStartNewChatButton() {
 
 async function handleClickStartChatButton() {
   try {
+    if (auth.getUserInfo.id === null) {
+      throw new Error('로그인이 필요합니다.')
+    }
     await createNewChat(topic.value, auth.getUserInfo.id)
     closeDialog()
   } catch (error) {
@@ -75,13 +94,22 @@ async function createNewChat(topic: string, userId: string) {
 
 <template>
   <div class="max-h-screen">
+    <div class="space-y-2 mt-6">
+      <router-link
+        v-for="chat in chatList"
+        :to="{ name: 'chat', params: { chatId: chat.id } }"
+        :key="chat.id"
+      >
+        <ChatListItem :chat="chat" />
+      </router-link>
+    </div>
+
     <button
       class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-6"
       @click="handleClickStartNewChatButton"
     >
       새로운 대화 시작
     </button>
-
     <v-dialog v-model="dialog" width="auto">
       <v-card>
         <v-card-text> 고무오리에게 들려줄 주제를 입력해주세요. </v-card-text>
