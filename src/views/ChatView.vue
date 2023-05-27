@@ -39,8 +39,6 @@ import { IMAGE_URL } from '@/utils/constants/image.js'
 
 const router = useRouter()
 const useAuth = useAuthStore()
-const mockUserId = 1
-const mockRubberDuckUserId = 2
 
 onMounted(() => {
   fetchMessages()
@@ -83,35 +81,6 @@ async function subscribeChat() {
     .subscribe()
 }
 
-function generateRandomKwak(): string {
-  const length = Math.floor(Math.random() * 5) + 1
-  let kwak = ''
-
-  for (let i = 0; i < length; i++) {
-    kwak += '꽥'
-  }
-
-  return kwak
-}
-
-async function sendRubberDuckMessage() {
-  try {
-    const { data, error } = await supabase.from('message').insert([
-      {
-        content: generateRandomKwak(),
-        chat_id: chatId.value,
-        sender_id: mockRubberDuckUserId,
-        receiver_id: mockUserId
-      }
-    ])
-    if (error) {
-      throw new Error('메시지를 전송하지 못했습니다. 다시 시도해주세요.')
-    }
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
-}
 async function sendMessage() {
   try {
     if (!content.value) {
@@ -146,7 +115,6 @@ async function handleSubmitMessage() {
     startLoading()
     await sendMessage()
     resetContent()
-    await sendRubberDuckMessage()
     await fetchMessages()
   } catch (error) {
     console.error(error)
