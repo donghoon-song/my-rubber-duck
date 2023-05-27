@@ -111,19 +111,19 @@ async function createNewChat(topic: string, userId: string) {
     >
       새로 배운 주제 설명하기
     </button>
-    <v-dialog v-model="dialog" width="auto">
-      <v-card>
-        <v-card-text> 고무오리에게 들려줄 주제를 입력해주세요. </v-card-text>
+    <v-dialog v-model="dialog">
+      <v-card class="pa-4 text-center">
+        <v-card-title class="whitespace-normal"> 무엇을 배웠나요? </v-card-title>
         <v-text-field
           v-model="topic"
           :readonly="isLoading"
           class="mb-2"
           clearable
-          placeholder="어떤 이야기를 들려주고 싶으신가요?"
+          placeholder="주제"
         ></v-text-field>
         <v-card-actions>
           <v-btn
-            color="primary"
+            color="#0027FF"
             block
             :loading="isLoading"
             :disabled="!validateTopic()"
@@ -132,7 +132,7 @@ async function createNewChat(topic: string, userId: string) {
           </v-btn>
         </v-card-actions>
         <v-card-actions>
-          <v-btn color="primary" block @click="closeDialog">닫기</v-btn>
+          <v-btn color="00C1FF" block @click="closeDialog">닫기</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
