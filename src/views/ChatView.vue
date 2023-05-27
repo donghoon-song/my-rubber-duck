@@ -1,7 +1,12 @@
 <template>
   <div class="max-h-screen">
     <div class="mt-4">
-      <v-btn icon="mdi-arrow-left" variant="flat" density="compact" @click="router.push('/')" />
+      <v-btn
+        icon="mdi-arrow-left"
+        variant="flat"
+        density="compact"
+        @click="router.push({ name: 'chatList' })"
+      />
     </div>
     <div class="has-arrow">
       <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
