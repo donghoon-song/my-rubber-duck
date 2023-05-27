@@ -31,7 +31,7 @@ async function handleClickLoginButton() {
 
 <template>
   <div>
-    <h1 class="home-title">Quack Chat</h1>
+    <h1 class="home-title">꽥! 챗</h1>
     <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK" alt="main-rubber-duck image" />
 
     <button
