@@ -97,7 +97,7 @@ async function createNewChat(topic: string, userId: string) {
 
 <template>
   <div class="max-h-screen">
-    <div class="space-y-4 mt-14">
+    <div class="space-y-4 mt-6">
       <router-link
         class="block"
         v-for="chat in chatList"
