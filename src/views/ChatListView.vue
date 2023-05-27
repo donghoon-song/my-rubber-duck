@@ -94,8 +94,9 @@ async function createNewChat(topic: string, userId: string) {
 
 <template>
   <div class="max-h-screen">
-    <div class="space-y-2 mt-6">
+    <div class="space-y-4 mt-14">
       <router-link
+        class="block"
         v-for="chat in chatList"
         :to="{ name: 'chat', params: { chatId: chat.id } }"
         :key="chat.id"
@@ -108,7 +109,7 @@ async function createNewChat(topic: string, userId: string) {
       class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-6"
       @click="handleClickStartNewChatButton"
     >
-      새로운 대화 시작
+      새로 배운 주제 설명하기
     </button>
     <v-dialog v-model="dialog" width="auto">
       <v-card>
