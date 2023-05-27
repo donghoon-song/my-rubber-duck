@@ -2,8 +2,14 @@
 import { RouterView } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { supabase } from './utils/supabase'
+import { useRouter } from 'vue-router'
+import { useMetaStore } from '@/stores/meta'
+import TopBar from './components/TopBar.vue'
+
+const router = useRouter()
 
 const auth = useAuthStore()
+const useMeta = useMetaStore()
 
 supabase.auth.onAuthStateChange((event, session) => {
   auth.setUserInfo(session?.user)
@@ -12,6 +18,8 @@ supabase.auth.onAuthStateChange((event, session) => {
 
 <template>
   <main class="app-main">
+    <TopBar />
+
     <div class="app-default-layout">
       <RouterView />
     </div>

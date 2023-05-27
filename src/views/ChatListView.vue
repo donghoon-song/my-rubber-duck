@@ -4,15 +4,18 @@ import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
 import ChatListItem from '@/components/ChatListItem.vue'
+import { useMetaStore } from '@/stores/meta'
 
 const dialog = ref(false)
 const topic = ref('')
 const isLoading = ref(false)
 const chatList = ref<any>([])
+const useMeta = useMetaStore()
 
 const auth = useAuthStore()
 
 onMounted(() => {
+  useMeta.setMetaTitle('채팅 목록')
   fetchChatList()
 })
 
@@ -94,7 +97,7 @@ async function createNewChat(topic: string, userId: string) {
 
 <template>
   <div class="max-h-screen">
-    <div class="space-y-4 mt-14">
+    <div class="space-y-4 mt-6">
       <router-link
         class="block"
         v-for="chat in chatList"
