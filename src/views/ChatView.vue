@@ -33,11 +33,12 @@
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/utils/supabase'
+import { useAuthStore } from '@/stores/auth'
 import MessageRow from '@/components/MessageRow.vue'
 import { IMAGE_URL } from '@/utils/constants/image.js'
 
 const router = useRouter()
-
+const useAuth = useAuthStore()
 const mockUserId = 1
 const mockRubberDuckUserId = 2
 
@@ -120,8 +121,7 @@ async function sendMessage() {
       {
         content: content.value,
         chat_id: chatId.value,
-        sender_id: mockUserId,
-        receiver_id: mockRubberDuckUserId
+        sender_id: useAuth.getUserInfo.id
       }
     ])
     if (error) {
