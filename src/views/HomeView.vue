@@ -32,7 +32,7 @@ async function handleClickLoginButton() {
 <template>
   <div>
     <h1 class="home-title">꽥! 챗</h1>
-    <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK" alt="main-rubber-duck image" />
+    <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK_LISTENING" alt="main-rubber-duck image" />
 
     <button
       class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4"
