@@ -109,7 +109,7 @@ async function createNewChat(topic: string, userId: string) {
       class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-6"
       @click="handleClickStartNewChatButton"
     >
-      새로운 대화 시작
+      새로 배운 주제 설명하기
     </button>
     <v-dialog v-model="dialog" width="auto">
       <v-card>
