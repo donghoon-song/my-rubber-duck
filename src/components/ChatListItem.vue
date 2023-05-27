@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center gap-2 rounded-full bg-[#FFF9C4] h-12 p-2">
     <v-avatar>
-      <v-img :src="IMAGE_URL.RUBBER_DUCK_AVATAR" alt="rubber duck avatar image"></v-img>
+      <v-img :src="IMAGE_URL.RUBBER_DUCK_LISTENING" alt="rubber duck avatar image"></v-img>
     </v-avatar>
     <div class="text-2xl">
       {{ chat.topic }}
