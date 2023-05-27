@@ -4,6 +4,8 @@ import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
 import ChatListItem from '@/components/ChatListItem.vue'
+import type { Chat } from '@/types/chat'
+import router from '@/router'
 
 const dialog = ref(false)
 const topic = ref('')
@@ -31,13 +33,19 @@ function handleClickStartNewChatButton() {
 
 async function handleClickStartChatButton() {
   try {
+    startLoading()
     if (auth.getUserInfo.id === null) {
       throw new Error('로그인이 필요합니다.')
     }
-    await createNewChat(topic.value, auth.getUserInfo.id)
+    const data: any = await createNewChat(topic.value, auth.getUserInfo.id)
+    const chatId = data?.id
+    resetInput()
     closeDialog()
+    redirectToChat(chatId)
   } catch (error) {
     console.error(error)
+  } finally {
+    finishLoading()
   }
 }
 
@@ -47,6 +55,14 @@ function openDialog() {
 
 function closeDialog() {
   dialog.value = false
+}
+
+function resetInput() {
+  topic.value = ''
+}
+
+function redirectToChat(chatId: string) {
+  router.push({ name: 'chat', params: { chatId } })
 }
 
 function required(value: string) {
@@ -67,27 +83,31 @@ function finishLoading() {
 
 async function createNewChat(topic: string, userId: string) {
   try {
-    startLoading()
     if (!topic) {
       throw new Error('토픽은 비어 있을 수 없습니다.')
     }
     if (topic.length > 255) {
       throw new Error('토픽이 너무 깁니다.')
     }
-    const { error } = await supabase.from('chat').insert([
-      {
-        topic: topic,
-        user_id: userId
-      }
-    ])
+    const { data, error } = await supabase
+      .from('chat')
+      .insert([
+        {
+          topic: topic,
+          user_id: userId
+        }
+      ])
+      .select()
+      .single()
+    if (data) {
+      return data
+    }
     if (error) {
       throw new Error('채팅을 생성하지 못했습니다. 다시 시도해주세요.')
     }
   } catch (error) {
     console.error(error)
     throw error
-  } finally {
-    finishLoading()
   }
 }
 </script>
