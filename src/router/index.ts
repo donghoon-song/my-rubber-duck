@@ -14,6 +14,10 @@ const router = createRouter({
     {
       path: '/chat/list',
       name: 'chatList',
+      meta: {
+        title: '채팅 목록',
+        showBackButton: false
+      },
       component: () => import('../views/ChatListView.vue')
     },
     {

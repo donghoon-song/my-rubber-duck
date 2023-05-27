@@ -14,6 +14,15 @@ const useMeta = useMetaStore()
 supabase.auth.onAuthStateChange((event, session) => {
   auth.setUserInfo(session?.user)
 })
+
+router.beforeEach((to, from, next) => {
+  if (Object.keys(to.meta).length > 0) {
+    useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
+  } else {
+    useMeta.resetMeta()
+  }
+  next()
+})
 </script>
 
 <template>
