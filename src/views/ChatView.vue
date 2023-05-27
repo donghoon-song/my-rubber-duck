@@ -1,13 +1,5 @@
 <template>
   <div class="max-h-screen">
-    <div class="mt-4">
-      <v-btn
-        icon="mdi-arrow-left"
-        variant="flat"
-        density="compact"
-        @click="router.push({ name: 'chatList' })"
-      />
-    </div>
     <div class="has-arrow">
       <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
         <div v-for="message in messages" :key="message.id">
@@ -41,11 +33,15 @@ import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/stores/auth'
 import MessageRow from '@/components/MessageRow.vue'
 import { IMAGE_URL } from '@/utils/constants/image.js'
+import { useMetaStore } from '@/stores/meta'
 
 const router = useRouter()
 const useAuth = useAuthStore()
+const useMeta = useMetaStore()
 
-onMounted(() => {
+onMounted(async () => {
+  await fetchChat()
+  useMeta.setMetaTitle(topic.value)
   fetchMessages()
 })
 
@@ -54,7 +50,17 @@ const chatId = ref(route.params.chatId)
 // TODO : type 정의
 const messages = ref()
 const content = ref('')
+const topic = ref('')
 const isLoading = ref(false)
+
+async function fetchChat() {
+  try {
+    const { data } = await supabase.from('chat').select('*').eq('id', chatId.value).single()
+    topic.value = data?.topic
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 async function fetchMessages() {
   try {
@@ -62,6 +68,7 @@ async function fetchMessages() {
       .from('message')
       .select(`id, content, sender_id, user:sender_id (avatar_img)`)
       .eq('chat_id', chatId.value)
+
     messages.value = data
   } catch (error) {
     console.error(error)
