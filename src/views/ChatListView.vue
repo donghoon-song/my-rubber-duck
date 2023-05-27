@@ -94,8 +94,9 @@ async function createNewChat(topic: string, userId: string) {
 
 <template>
   <div class="max-h-screen">
-    <div class="space-y-2 mt-6">
+    <div class="space-y-4 mt-14">
       <router-link
+        class="block"
         v-for="chat in chatList"
         :to="{ name: 'chat', params: { chatId: chat.id } }"
         :key="chat.id"
