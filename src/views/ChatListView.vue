@@ -4,18 +4,15 @@ import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
 import ChatListItem from '@/components/ChatListItem.vue'
-import { useMetaStore } from '@/stores/meta'
 
 const dialog = ref(false)
 const topic = ref('')
 const isLoading = ref(false)
 const chatList = ref<any>([])
-const useMeta = useMetaStore()
 
 const auth = useAuthStore()
 
 onMounted(() => {
-  useMeta.setMetaTitle('채팅 목록')
   fetchChatList()
 })
 
