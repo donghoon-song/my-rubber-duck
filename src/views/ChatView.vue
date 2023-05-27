@@ -3,13 +3,15 @@
     <div class="mt-4">
       <v-btn icon="mdi-arrow-left" variant="flat" density="compact" @click="router.push('/')" />
     </div>
-    <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
-      <div v-for="message in messages" :key="message.id">
-        <message-row
-          :message="message"
-          :position="message.sender_id === mockUserId ? 'left' : 'right'"
-        />
+    <div class="has-arrow">
+      <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
+        <div v-for="message in messages" :key="message.id">
+          <message-row :message="message" position="left" />
+        </div>
       </div>
+    </div>
+    <div class="w-full flex justify-end mt-4">
+      <img :src="IMAGE_URL.RUBBER_DUCK_LISTENING" class="w-[20%]" />
     </div>
     <div class="flex justify-center align-center mt-4">
       <v-textarea
@@ -32,6 +34,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/utils/supabase'
 import MessageRow from '@/components/MessageRow.vue'
+import { IMAGE_URL } from '@/utils/constants/image.js'
 
 const router = useRouter()
 
@@ -160,4 +163,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.has-arrow {
+  position: relative;
+  &:after {
+    content: '';
+    @apply absolute bottom-0 right-6 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-4 h-4 bg-[#e0c533] border-r border-b border-[#e0c533];
+  }
+}
+</style>
