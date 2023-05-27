@@ -29,8 +29,8 @@ supabase.auth.onAuthStateChange((event, session) => {
 <style lang="scss" scoped>
 .app-main {
   background-color: var(--primary-color);
-  min-height: 100vh;
-  overflow: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .app-default-layout {
