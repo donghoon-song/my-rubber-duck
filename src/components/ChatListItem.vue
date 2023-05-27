@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-2 rounded-full bg-[#FFF9C4] h-12 p-2">
+  <div class="flex items-center gap-2 rounded-full bg-[#FFF9C4] h-12 p-2 shadow-lg">
     <v-avatar>
       <v-img :src="IMAGE_URL.RUBBER_DUCK_LISTENING" alt="rubber duck avatar image"></v-img>
     </v-avatar>
