@@ -113,8 +113,8 @@ async function createNewChat(topic: string, userId: string) {
 </script>
 
 <template>
-  <div class="max-h-screen">
-    <div class="space-y-4 mt-6">
+  <div>
+    <div class="space-y-4 max-h-[calc(100vh-64px-56px-3rem)] overflow-y-scroll">
       <router-link
         class="block"
         v-for="chat in chatList"
