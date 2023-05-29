@@ -16,11 +16,9 @@ supabase.auth.onAuthStateChange((event, session) => {
 })
 
 router.beforeEach((to, from, next) => {
-  if (Object.keys(to.meta).length > 0) {
-    useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
-  } else {
-    useMeta.resetMeta()
-  }
+  useMeta.resetMeta()
+  useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
+
   next()
 })
 </script>
