@@ -16,18 +16,17 @@ supabase.auth.onAuthStateChange((event, session) => {
 })
 
 router.beforeEach((to, from, next) => {
-  if (Object.keys(to.meta).length > 0) {
-    useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
-  } else {
-    useMeta.resetMeta()
-  }
+  useMeta.resetMeta()
+  useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
+
   next()
 })
 </script>
 
 <template>
   <main class="app-main">
-    <TopBar />
+    <TopBar v-if="useMeta.getShowTopBar" />
+    <div v-else class="h-16"></div>
 
     <div class="app-default-layout">
       <RouterView />
