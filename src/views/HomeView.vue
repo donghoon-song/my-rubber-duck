@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { supabase } from '@/utils/supabase'
 import { IMAGE_URL } from '@/utils/constants/image.js'
+import { getURL } from '@/utils/url'
 
 async function googleSignIn() {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/chat/list`
+        redirectTo: `${getURL()}/chat/list`
       }
     })
     if (error) {
