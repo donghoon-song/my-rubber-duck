@@ -16,16 +16,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 })
 
 router.beforeEach((to, from, next) => {
-  if (!auth.isLoggedIn) {
-    next({ name: 'home' })
-  }
-  if (auth.isLoggedIn && to.name === 'home') {
-    next({ name: 'chatList' })
-  }
-  next()
-})
-
-router.beforeEach((to, from, next) => {
   useMeta.resetMeta()
   useMeta.setMetaInfo({ ...useMeta.getMetaInfo, ...to.meta })
 
