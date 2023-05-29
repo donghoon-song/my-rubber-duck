@@ -16,7 +16,8 @@ export const useAuthStore = defineStore('auth', {
       }
     } as RootState),
   getters: {
-    getUserInfo: (state) => state.userInfo
+    getUserInfo: (state) => state.userInfo,
+    isLoggedIn: (state) => state.userInfo.id !== null
   },
   actions: {
     setUserInfo(userInfo: any) {
