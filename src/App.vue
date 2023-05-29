@@ -25,7 +25,8 @@ router.beforeEach((to, from, next) => {
 
 <template>
   <main class="app-main">
-    <TopBar />
+    <TopBar v-if="useMeta.getShowTopBar" />
+    <div v-else class="h-16"></div>
 
     <div class="app-default-layout">
       <RouterView />
