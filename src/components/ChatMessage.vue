@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: tailwind 색상값 변경 -->
   <div class="bg-[#ffaa39] rounded-xl py-1 px-3 text-white" v-html="content"></div>
 </template>
 
