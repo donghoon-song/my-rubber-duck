@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
 <style lang="scss" scoped>
 .app-main {
   background-color: var(--primary-color);
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
