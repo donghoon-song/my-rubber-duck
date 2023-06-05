@@ -15,10 +15,11 @@
       </div>
     </div>
     <div class="flex justify-center align-center">
-      <v-textarea
+      <v-text-field
         class="w-[80%] rounded-lg"
         placeholder="메시지를 입력하세요"
         hide-details
+        :autofocus="true"
         no-resize
         rows="1"
         v-model="content"
