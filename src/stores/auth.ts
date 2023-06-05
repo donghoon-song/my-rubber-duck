@@ -2,18 +2,15 @@ import { defineStore } from 'pinia'
 
 export type RootState = {
   userInfo: {
-    id: string | null
-    email: string | null
-  }
+    id: string
+    email?: string
+  } | null
 }
 
 export const useAuthStore = defineStore('auth', {
   state: () =>
     ({
-      userInfo: {
-        id: null,
-        email: null
-      }
+      userInfo: null
     } as RootState),
   getters: {
     getUserInfo: (state) => state.userInfo
