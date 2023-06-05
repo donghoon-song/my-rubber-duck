@@ -5,11 +5,18 @@ import { useRouter } from 'vue-router'
 import { watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { getURL } from '@/utils/url'
+import { onMounted } from 'vue'
 
 const router = useRouter()
 const useAuth = useAuthStore()
 
 const isLoginSuccess = router.currentRoute.value.query.login === 'success'
+
+onMounted(async () => {
+  if (useAuth.getUserInfo) {
+    router.push({ name: 'chatList' })
+  }
+})
 
 watch(
   () => useAuth.getUserInfo,
