@@ -20,7 +20,10 @@ onMounted(() => {
 
 async function fetchChatList() {
   try {
-    const { data } = await supabase.from('chat').select(`id, topic, user_id`)
+    const { data } = await supabase
+      .from('chat')
+      .select(`id, topic, user_id`)
+      .eq('user_id', auth.getUserInfo.id)
     chatList.value = data
   } catch (error) {
     console.error(error)
