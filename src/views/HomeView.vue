@@ -4,6 +4,7 @@ import { IMAGE_URL } from '@/utils/constants/image.js'
 import { useRouter } from 'vue-router'
 import { watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { getURL } from '@/utils/url'
 
 const router = useRouter()
 const useAuth = useAuthStore()
@@ -24,7 +25,7 @@ async function googleSignIn() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:5173?login=success'
+        redirectTo: `${getURL()}?login=success`
       }
     })
     if (error) {
