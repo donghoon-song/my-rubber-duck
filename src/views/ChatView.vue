@@ -1,16 +1,20 @@
 <template>
-  <div class="max-h-screen">
-    <div class="has-arrow">
-      <div class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[80vh]">
-        <div v-for="message in messages" :key="message.id">
-          <message-row :message="message" position="left" />
+  <div>
+    <div class="max-h-[calc(100dvh-64px-56px)] mb-2">
+      <div class="has-arrow">
+        <div
+          class="bg-[#E0C533] rounded-lg mt-4 pa-4 space-y-2 overflow-y-scroll max-h-[calc(100dvh-64px-56px-56px-3rem)]"
+        >
+          <div v-for="message in messages" :key="message.id">
+            <message-row :message="message" position="left" />
+          </div>
         </div>
       </div>
+      <div class="w-full flex justify-end mt-4">
+        <img :src="IMAGE_URL.RUBBER_DUCK_LISTENING" class="w-[20%]" />
+      </div>
     </div>
-    <div class="w-full flex justify-end mt-4">
-      <img :src="IMAGE_URL.RUBBER_DUCK_LISTENING" class="w-[20%]" />
-    </div>
-    <div class="flex justify-center align-center mt-4">
+    <div class="flex justify-center align-center">
       <v-textarea
         class="w-[80%] rounded-lg"
         placeholder="메시지를 입력하세요"
