@@ -9,6 +9,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { inject } from '@vercel/analytics'
 
 const vuetify = createVuetify({
   components,
@@ -26,3 +27,5 @@ app.use(router)
 app.use(vuetify)
 
 app.mount('#app')
+
+inject()
