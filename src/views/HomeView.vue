@@ -14,7 +14,7 @@ const isLoginSuccess = router.currentRoute.value.query.login === 'success'
 
 onMounted(async () => {
   if (useAuth.getUserInfo) {
-    router.push({ name: 'chatList' })
+    router.push({ name: 'talk' })
   }
 })
 
@@ -22,7 +22,7 @@ watch(
   () => useAuth.getUserInfo,
   (newVal) => {
     if (newVal) {
-      router.push({ name: 'chatList' })
+      router.push({ name: 'talk' })
     }
   }
 )
