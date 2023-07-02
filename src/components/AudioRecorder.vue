@@ -1,6 +1,6 @@
 <template>
   <!-- TODO: 컴포넌트 분리 -->
-  <div class="text-center w-full mx-auto rounded-lg shadow-lg">
+  <div class="text-center w-full mx-auto rounded-lg">
     <div class="mb-3">
       <v-btn v-if="recording" icon="mdi-stop" size="x-large" @click="toggleRecording"> </v-btn>
       <v-btn v-else icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
