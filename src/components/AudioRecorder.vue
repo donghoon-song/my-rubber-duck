@@ -1,15 +1,15 @@
 <template>
   <!-- TODO: 컴포넌트 분리 -->
-  <div class="text-center w-full mx-auto rounded-lg shadow-lg">
+  <div class="text-center w-full mx-auto rounded-lg">
     <div class="mb-3">
       <v-btn v-if="recording" icon="mdi-stop" size="x-large" @click="toggleRecording"> </v-btn>
       <v-btn v-else icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
     </div>
-    <div class="h-12">
+    <div class="min-h-12">
       <div class="text-sm font-bold">{{ successMessage }}</div>
       <div class="text-sm">{{ instructionMessage }}</div>
       <div>{{ recordedTime }}</div>
-      <div class="text-sm text-red-400">{{ errorMessage }}</div>
+      <div class="text-sm text-red-600">{{ errorMessage }}</div>
     </div>
     <figure class="flex justify-center w-full">
       <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
@@ -20,6 +20,7 @@
   </div>
 </template>
 
+// TODO: js파일 ts로 변경
 <script>
 import Recorder from '../lib/Recorder'
 import { convertTimeMMSS } from '@/utils/time'
@@ -28,7 +29,7 @@ import { IMAGE_URL } from '@/utils/constants/image.js'
 const INSTRUCTION_MESSAGE = '학습을 시작하려면 녹음 버튼을 누르세요.'
 const INSTRUCTION_MESSAGE_STOP = '학습을 끝내려면 정지 버튼을 누르세요.'
 const ERROR_MESSAGE =
-  'Failed to use microphone. Please refresh and try again and permit the use of a microphone.'
+  '마이크 사용권한이 없습니다. 새로고침 후 다시 시도하시거나 마이크 사용권한을 허용해주세요.'
 const SUCCESS_MESSAGE = '녹음이 완료되었어요. 다시 들어보셔도 좋아요.'
 const SUCCESS_MESSAGE_SUBMIT = 'Successfully submitted audio message! Thank you!'
 const ERROR_SUBMITTING_MESSAGE = 'Error submitting audio message! Please try again later.'
