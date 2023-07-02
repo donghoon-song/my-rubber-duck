@@ -9,7 +9,7 @@
       <div class="text-sm font-bold">{{ successMessage }}</div>
       <div class="text-sm">{{ instructionMessage }}</div>
       <div>{{ recordedTime }}</div>
-      <div class="text-sm text-red-400">{{ errorMessage }}</div>
+      <div class="text-sm text-red-600">{{ errorMessage }}</div>
     </div>
     <figure class="flex justify-center w-full">
       <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
