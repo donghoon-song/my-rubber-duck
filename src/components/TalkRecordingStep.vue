@@ -1,0 +1,36 @@
+<template>
+  <div class="mb-2">
+    <div class="text-2xl">
+      <span class="text-[#0027ff]">{{ topic }}</span
+      >에 대해 설명해주세요.
+    </div>
+    <div class="text-2xl">고무오리가 들어줄게요.</div>
+  </div>
+  <img class="mb-2" :src="IMAGE_URL.RUBBER_DUCK_LISTENING" alt="main-rubber-duck image" />
+  <div class="text-center">
+    <audio-recorder @finish-talk="handleFinishTalk" />
+  </div>
+  <button
+    class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
+    @click="handleClickFinishButton"
+  >
+    종료
+  </button>
+</template>
+
+<script setup lang="ts">
+import AudioRecorder from '@/components/AudioRecorder.vue'
+import { IMAGE_URL } from '@/utils/constants/image.js'
+
+defineProps<{
+  topic: string
+}>()
+
+const emit = defineEmits(['finish-talk'])
+
+function handleClickFinishButton() {
+  emit('finish-talk')
+}
+</script>
+
+<style></style>
