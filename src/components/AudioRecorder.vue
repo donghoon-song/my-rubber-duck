@@ -20,6 +20,7 @@
   </div>
 </template>
 
+// TODO: js파일 ts로 변경
 <script>
 import Recorder from '../lib/Recorder'
 import { convertTimeMMSS } from '@/utils/time'
