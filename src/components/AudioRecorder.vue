@@ -28,7 +28,7 @@ import { IMAGE_URL } from '@/utils/constants/image.js'
 const INSTRUCTION_MESSAGE = '학습을 시작하려면 녹음 버튼을 누르세요.'
 const INSTRUCTION_MESSAGE_STOP = '학습을 끝내려면 정지 버튼을 누르세요.'
 const ERROR_MESSAGE =
-  'Failed to use microphone. Please refresh and try again and permit the use of a microphone.'
+  '마이크 사용권한이 없습니다. 새로고침 후 다시 시도하시거나 마이크 사용권한을 허용해주세요.'
 const SUCCESS_MESSAGE = '녹음이 완료되었어요. 다시 들어보셔도 좋아요.'
 const SUCCESS_MESSAGE_SUBMIT = 'Successfully submitted audio message! Thank you!'
 const ERROR_SUBMITTING_MESSAGE = 'Error submitting audio message! Please try again later.'
