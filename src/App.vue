@@ -25,10 +25,10 @@ router.beforeEach((to, from, next) => {
 
 <template>
   <main class="app-main">
-    <TopBar v-if="useMeta.getShowTopBar" />
-    <div v-else class="h-16"></div>
-
     <div class="app-default-layout">
+      <TopBar v-if="useMeta.getShowTopBar" />
+      <div v-else class="h-16"></div>
+
       <RouterView />
     </div>
   </main>
@@ -37,11 +37,11 @@ router.beforeEach((to, from, next) => {
 <style lang="scss" scoped>
 .app-main {
   background-color: var(--primary-color);
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
+  @apply flex flex-col items-center;
 }
 
 .app-default-layout {
-  @apply mx-6;
+  @apply mx-6 max-w-sm;
 }
 </style>
