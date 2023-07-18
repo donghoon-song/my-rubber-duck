@@ -1,13 +1,9 @@
 <template>
   <div>
-    <div class="max-h-100dvh overflow-y-scroll">
+    <div class="max-h-100dvh overflow-y-scroll py-10">
+      <img class="mb-2" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
       <template v-if="step === 1">
         <div class="flex flex-col justify-center">
-          <img
-            class="mt-[4.5rem] mb-2"
-            :src="IMAGE_URL.RUBBER_DUCK_LISTENING"
-            alt="main-rubber-duck image"
-          />
           <v-text-field
             v-model="topic"
             :hide-details="true"
