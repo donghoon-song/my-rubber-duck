@@ -25,6 +25,7 @@
 import Recorder from '../lib/Recorder'
 import { convertTimeMMSS } from '@/utils/time'
 import { IMAGE_URL } from '@/utils/constants/image.js'
+import { durationToSeconds } from '@/utils/time'
 
 const INSTRUCTION_MESSAGE = '학습을 시작하려면 녹음 버튼을 누르세요.'
 const INSTRUCTION_MESSAGE_STOP = '학습을 끝내려면 정지 버튼을 누르세요.'
@@ -105,6 +106,7 @@ export default {
       if (this.recordedAudio) {
         this.successMessage = SUCCESS_MESSAGE
         this.instructionMessage = null
+        this.$emit('finish-recording', { duration: durationToSeconds(recordList[0].duration) })
       }
       if (this.afterRecording) {
         this.afterRecording()
