@@ -1,5 +1,5 @@
 <template>
-  <header class="mx-6 flex items-center h-16">
+  <header class="mx-6 flex items-center justify-center h-16">
     <v-btn
       v-if="useMeta.getShowBackButton"
       icon="mdi-arrow-left"

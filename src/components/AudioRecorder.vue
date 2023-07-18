@@ -5,7 +5,7 @@
       <v-btn v-if="recording" icon="mdi-stop" size="x-large" @click="toggleRecording"> </v-btn>
       <v-btn v-else icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
     </div>
-    <div class="min-h-12">
+    <div class="min-h-12 break-keep">
       <div class="text-sm font-bold">{{ successMessage }}</div>
       <div class="text-sm">{{ instructionMessage }}</div>
       <div>{{ recordedTime }}</div>
