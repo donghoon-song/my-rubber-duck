@@ -36,6 +36,8 @@
 import { IMAGE_URL } from '@/utils/constants/image.js'
 import { ref } from 'vue'
 import TalkRecordingStep from '@/components/TalkRecordingStep.vue'
+import { supabase } from '@/utils/supabase'
+import { useAuthStore } from '@/stores/auth'
 
 const defaultStep = 1
 
@@ -43,6 +45,8 @@ const topic = ref('')
 const isLoading = ref(false)
 
 const step = ref(defaultStep)
+
+const useAuth = useAuthStore()
 
 function handleStartTalk() {
   step.value = 2
@@ -69,8 +73,27 @@ function reset() {
   resetStep()
 }
 
-function handleFinishTalk() {
+async function handleFinishTalk(recordData: { duration: number }) {
+  await handleUploadTalk(recordData)
   reset()
+}
+
+const handleUploadTalk = async (recordData: { duration: number }) => {
+  try {
+    if (!useAuth.getUserInfo) {
+      throw new Error('로그인이 필요합니다.')
+    }
+    if (!recordData.duration) {
+      throw new Error('녹음된 데이터가 없습니다.')
+    }
+    await supabase.from('talk').insert({
+      topic: topic.value,
+      duration: recordData.duration,
+      speaker_id: useAuth.getUserInfo.id
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 function handleStartNewTalk() {
