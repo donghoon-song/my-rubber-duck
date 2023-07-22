@@ -5,6 +5,7 @@ import { supabase } from './utils/supabase'
 import { useRouter } from 'vue-router'
 import { useMetaStore } from '@/stores/meta'
 import TopBar from './components/TopBar.vue'
+import BottomNavigation from './components/BottomNavigation.vue'
 
 const router = useRouter()
 
@@ -24,14 +25,18 @@ router.beforeEach((to, from, next) => {
 </script>
 
 <template>
-  <main class="app-main">
-    <div class="app-default-layout">
-      <TopBar v-if="useMeta.getShowTopBar" />
-      <div v-else class="h-16"></div>
+  <v-app>
+    <main class="app-main">
+      <div class="app-default-layout">
+        <TopBar v-if="useMeta.getShowTopBar" />
+        <div v-else class="h-16"></div>
 
-      <RouterView />
-    </div>
-  </main>
+        <RouterView />
+
+        <BottomNavigation />
+      </div>
+    </main>
+  </v-app>
 </template>
 
 <style lang="scss" scoped>
