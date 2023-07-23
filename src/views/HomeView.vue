@@ -55,9 +55,9 @@ async function handleClickLoginButton() {
 </script>
 
 <template>
-  <div>
+  <section class="flex flex-col justify-center">
     <h1 class="home-title">꽥! 챗</h1>
-    <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK_LISTENING" alt="main-rubber-duck image" />
+    <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
 
     <template v-if="isLoginSuccess"> 로그인 중입니다. </template>
     <template v-else>
@@ -68,7 +68,7 @@ async function handleClickLoginButton() {
         구글 로그인
       </button>
     </template>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
