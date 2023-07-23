@@ -39,6 +39,15 @@ const router = createRouter({
         showBackButton: false
       },
       component: () => import('../views/TalkView.vue')
+    },
+    {
+      path: '/talk/log',
+      name: 'talkLog',
+      meta: {
+        title: '학습하기',
+        showBackButton: false
+      },
+      component: () => import('../views/TalkLogView.vue')
     }
   ]
 })
