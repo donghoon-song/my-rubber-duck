@@ -12,7 +12,7 @@
       </v-btn>
     </a>
 
-    <a href="/log">
+    <a href="/talk/log">
       <v-btn value="nearby">
         <v-icon>mdi-duck</v-icon>
       </v-btn>
