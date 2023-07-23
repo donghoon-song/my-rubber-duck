@@ -1,2 +1,6 @@
-@import "./font.css";
-@import "./variables.css";
+@import './font.css';
+@import './variables.css';
+
+.primary-button {
+  @apply !bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-2 disabled:opacity-50;
+}
