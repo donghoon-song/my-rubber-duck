@@ -1,9 +1,13 @@
 <template>
-  <div class="space-y-3">
+  <section class="space-y-3">
+    <NoResult v-if="talkList.length === 0">
+      <p class="text-center text-3xl mb-4">아직 학습기록이 없어요!</p>
+      <v-btn size="x-large" class="primary-button" @click="goToTalk"> 학습하러 가기 </v-btn>
+    </NoResult>
     <template v-for="talk in talkList" :key="`talk-${talk.id}`">
       <TalkLog :talk="talk" />
     </template>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -13,8 +17,11 @@ import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import type { Talk } from '@/types/talk'
 import TalkLog from '@/components/TalkLog.vue'
+import NoResult from '@/components/NoResult.vue'
+import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
+const router = useRouter()
 const talkList = ref<Talk[]>([])
 
 onMounted(async () => {
@@ -40,6 +47,10 @@ const fetchTalkList = async () => {
   } catch (error) {
     console.error(error)
   }
+}
+
+const goToTalk = () => {
+  router.push({ name: 'talk' })
 }
 </script>
 
