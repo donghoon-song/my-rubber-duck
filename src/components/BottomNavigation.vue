@@ -1,5 +1,11 @@
 <template>
-  <v-bottom-navigation style="bottom: 28px" bg-color="transparent" :elevation="0">
+  <v-bottom-navigation
+    density="default"
+    bg-color="#FFD700"
+    :elevation="0"
+    rounded="rounded-lg"
+    class="items-center border-t border-gray-200"
+  >
     <!-- <a href="/">
       <v-btn value="recent">
         <v-icon>mdi-home</v-icon>
