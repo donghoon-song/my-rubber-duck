@@ -30,7 +30,7 @@ onMounted(async () => {
 
 const fetchTalkList = async () => {
   try {
-    if (auth.getUserInfo === null) {
+    if (!auth.getUserInfo) {
       throw new Error('로그인이 필요합니다.')
     }
     const { data, error } = await supabase
