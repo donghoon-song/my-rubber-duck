@@ -1,7 +1,3 @@
-export interface Talk {
-  id: number
-  speaker_id: string
-  topic: string
-  created_at: string
-  duration: number
-}
+import type { Database } from './supabase'
+
+export type Talk = Database['public']['Tables']['talk']['Row']
