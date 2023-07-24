@@ -1,10 +1,9 @@
 <template>
-  <div class="mb-6 text-center">
+  <div class="mb-2 text-center">
     <div class="text-2xl">
       <span class="text-[#0027ff]">{{ topic }}</span
       >에 대해 설명해주세요.
     </div>
-    <div class="text-2xl">고무오리가 들어줄거에요 🐥</div>
   </div>
   <div class="text-center">
     <audio-recorder @finish-recording="handleFinishRecording" />
