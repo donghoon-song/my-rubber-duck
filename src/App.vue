@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
 
 <template>
   <v-app class="bg-[--primary-color]">
-    <v-app-bar color="#ffd700" density="default" rounded="true" :elevation="0" :height="80">
+    <v-app-bar color="#ffd700" density="default" rounded="true" :elevation="0">
       <div class="flex flex-col items-center w-full">
         <h1 class="text-2xl">
           {{ useMeta.getMetaTitle }}
