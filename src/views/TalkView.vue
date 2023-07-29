@@ -1,29 +1,31 @@
 <template>
-  <div class="w-full flex flex-col items-center">
-    <div class="flex flex-col items-center w-[70vw]">
-      <img class="w-[60vw]" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
-      <template v-if="step === 1">
-        <v-text-field
-          v-model="topic"
-          :hide-details="true"
-          :readonly="isLoading"
-          class="mb-4 w-full"
-          clearable
-          placeholder="고무오리에게 설명할 주제를 입력하세요."
-        ></v-text-field>
-        <button
-          class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-2 disabled:opacity-50 w-full"
-          :disabled="!validateTopic()"
-          @click="handleStartNewTalk"
-        >
-          다음
-        </button>
-      </template>
-      <template v-else-if="step === 2">
-        <talk-recording-step :topic="topic" @finish-talk="handleFinishTalk" />
-      </template>
-    </div>
-  </div>
+  <v-row>
+    <v-col :cols="12">
+      <div class="w-full flex flex-col items-center">
+        <img class="w-[70%]" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
+        <template v-if="step === 1">
+          <v-text-field
+            v-model="topic"
+            :hide-details="true"
+            :readonly="isLoading"
+            class="mb-4 w-full"
+            clearable
+            placeholder="고무오리에게 설명할 주제를 입력하세요."
+          ></v-text-field>
+          <button
+            class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-2 disabled:opacity-50 w-full"
+            :disabled="!validateTopic()"
+            @click="handleStartNewTalk"
+          >
+            다음
+          </button>
+        </template>
+        <template v-else-if="step === 2">
+          <talk-recording-step :topic="topic" @finish-talk="handleFinishTalk" />
+        </template>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup lang="ts">

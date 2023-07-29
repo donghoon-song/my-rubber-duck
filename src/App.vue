@@ -32,7 +32,7 @@ router.beforeEach((to, from, next) => {
         </h1>
       </div>
     </v-app-bar>
-    <v-main>
+    <v-main class="self-center w-full max-w-sm">
       <v-container class="py-0 px-4">
         <RouterView />
       </v-container>
