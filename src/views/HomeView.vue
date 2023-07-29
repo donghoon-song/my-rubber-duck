@@ -55,22 +55,24 @@ async function handleClickLoginButton() {
 </script>
 
 <template>
-  <section class="flex flex-col items-center">
-    <div class="flex flex-col items-center w-[70vw]">
-      <h1 class="home-title">꽥! 챗</h1>
-      <img class="mt-2" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
+  <v-row>
+    <v-col :cols="12">
+      <section class="flex flex-col items-center">
+        <h1 class="home-title">꽥! 챗</h1>
+        <img class="mt-2 w-[70%]" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
 
-      <template v-if="isLoginSuccess"> 로그인 중입니다. </template>
-      <template v-else>
-        <button
-          class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4"
-          @click="handleClickLoginButton"
-        >
-          구글 로그인
-        </button>
-      </template>
-    </div>
-  </section>
+        <template v-if="isLoginSuccess"> 로그인 중입니다. </template>
+        <template v-else>
+          <button
+            class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full w-full mt-4"
+            @click="handleClickLoginButton"
+          >
+            구글 로그인
+          </button>
+        </template>
+      </section>
+    </v-col>
+  </v-row>
 </template>
 
 <style lang="scss" scoped>
