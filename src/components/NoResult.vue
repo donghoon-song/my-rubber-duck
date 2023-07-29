@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <v-img :src="IMAGE_URL.RUBBER_DUCK_NO_RESULT" alt="empty talk image" width="90vw" />
+    <v-img :src="IMAGE_URL.RUBBER_DUCK_NO_RESULT" alt="empty talk image" width="80%" />
     <slot />
   </div>
 </template>
