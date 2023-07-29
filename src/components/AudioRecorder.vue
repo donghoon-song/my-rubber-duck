@@ -2,21 +2,47 @@
   <!-- TODO: 컴포넌트 분리 -->
   <div class="text-center w-full mx-auto rounded-lg">
     <div class="mb-3">
-      <v-btn v-if="recording" icon="mdi-stop" size="x-large" @click="toggleRecording"> </v-btn>
-      <v-btn v-else icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
+      <template v-if="!recordedAudio">
+        <!-- 녹음 전 -->
+        <template v-if="!recording">
+          <v-btn icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
+        </template>
+        <!-- 녹음 중 -->
+        <template v-if="recording">
+          <div class="flex flex-col items-center">
+            <v-btn icon="mdi-stop" size="x-large" class="mb-4" @click="toggleRecording"> </v-btn>
+            <div class="text-2xl">
+              {{ recordedTime }}
+            </div>
+          </div>
+        </template>
+      </template>
+      <template v-else>
+        <!-- 녹음 후 -->
+        <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
+          사용하시는 브라우저가
+          <code>audio</code> element 요소를 지원하지 않습니다.
+        </audio>
+        <div class="min-h-12 text-lg break-keep">
+          <div>{{ successMessage }}</div>
+          <div>{{ instructionMessage }}</div>
+          <div class="text-red-600">{{ errorMessage }}</div>
+        </div>
+        <v-alert type="info"> 녹음한 소리는 저장하지 않아요. </v-alert>
+        <button
+          class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
+          @click="finishRecording"
+        >
+          기록하기
+        </button>
+        <button
+          class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
+          @click="handleClickFinishButton"
+        >
+          종료하기
+        </button>
+      </template>
     </div>
-    <div class="min-h-12 break-keep">
-      <div class="text-sm font-bold">{{ successMessage }}</div>
-      <div class="text-sm">{{ instructionMessage }}</div>
-      <div>{{ recordedTime }}</div>
-      <div class="text-sm text-red-600">{{ errorMessage }}</div>
-    </div>
-    <figure class="flex justify-center w-full">
-      <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
-        사용하시는 브라우저가
-        <code>audio</code> element 요소를 지원하지 않습니다.
-      </audio>
-    </figure>
   </div>
 </template>
 
@@ -106,7 +132,7 @@ export default {
       if (this.recordedAudio) {
         this.successMessage = SUCCESS_MESSAGE
         this.instructionMessage = null
-        this.$emit('finish-recording', { duration: durationToSeconds(recordList[0].duration) })
+        // this.$emit('finish-recording', { duration: durationToSeconds(recordList[0].duration) })
       }
       if (this.afterRecording) {
         this.afterRecording()
@@ -143,6 +169,12 @@ export default {
       this.recording = false
       this.instructionMessage = INSTRUCTION_MESSAGE
       this.errorMessage = ERROR_MESSAGE
+    },
+    finishRecording() {
+      const recordList = this.recorder.recordList()
+      this.$emit('finish-recording', {
+        duration: durationToSeconds(recordList[0].duration)
+      })
     }
   }
 }
