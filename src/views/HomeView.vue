@@ -58,9 +58,13 @@ async function handleClickLoginButton() {
   <v-row>
     <v-col :cols="12">
       <section class="flex flex-col items-center">
-        <h1 class="home-title">꽥! 챗</h1>
+        <h1 class="home-title">내 손 안의 고무오리</h1>
         <img class="mt-2 w-[70%]" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
-
+        <div class="text-center">
+          <div class="text-2xl text-center mb-4">내가 잘 알고 있는 게 맞을까...?</div>
+          <div class="text-3xl text-center">언제 어디서든 무엇이든</div>
+          <div class="text-3xl text-center mb-4">고무오리에게 설명해보세요.</div>
+        </div>
         <template v-if="isLoginSuccess"> 로그인 중입니다. </template>
         <template v-else>
           <button
@@ -77,6 +81,6 @@ async function handleClickLoginButton() {
 
 <style lang="scss" scoped>
 .home-title {
-  @apply text-5xl font-bold text-center;
+  @apply text-4xl font-bold text-center;
 }
 </style>
