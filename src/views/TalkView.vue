@@ -85,7 +85,7 @@ const handleUploadTalk = async (recordData: { duration: number }) => {
     await supabase.from('talk').insert({
       topic: topic.value,
       duration: recordData.duration,
-      speaker_id: useAuth.getUserInfo.id
+      user_id: useAuth.getUserInfo.id
     })
   } catch (error) {
     console.error(error)
