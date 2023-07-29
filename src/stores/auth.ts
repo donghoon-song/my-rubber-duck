@@ -13,7 +13,8 @@ export const useAuthStore = defineStore('auth', {
       userInfo: null
     } as RootState),
   getters: {
-    getUserInfo: (state) => state.userInfo
+    getUserInfo: (state) => state.userInfo,
+    isUser: (state) => !!state.userInfo
   },
   actions: {
     setUserInfo(userInfo: any) {
