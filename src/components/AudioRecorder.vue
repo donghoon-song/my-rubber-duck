@@ -19,16 +19,15 @@
       </template>
       <template v-else>
         <!-- 녹음 후 -->
-        <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
-          사용하시는 브라우저가
-          <code>audio</code> element 요소를 지원하지 않습니다.
-        </audio>
         <div class="min-h-12 text-lg break-keep">
           <div>{{ successMessage }}</div>
           <div>{{ instructionMessage }}</div>
           <div class="text-red-600">{{ errorMessage }}</div>
         </div>
-        <v-alert type="info"> 녹음한 소리는 저장하지 않아요. </v-alert>
+        <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
+          사용하시는 브라우저가
+          <code>audio</code> element 요소를 지원하지 않습니다.
+        </audio>
         <button
           class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
           @click="finishRecording"
