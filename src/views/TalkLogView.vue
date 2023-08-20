@@ -1,5 +1,5 @@
 <template>
-  <section class="space-y-3">
+  <section class="space-y-3 py-2">
     <NoResult v-if="talkList.length === 0">
       <p class="text-center text-3xl mb-4">아직 학습기록이 없어요!</p>
       <v-btn size="x-large" class="primary-button" @click="goToTalk"> 학습하러 가기 </v-btn>
