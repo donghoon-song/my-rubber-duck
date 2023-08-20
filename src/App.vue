@@ -8,11 +8,11 @@ import BottomNavigation from './components/BottomNavigation.vue'
 
 const router = useRouter()
 
-const auth = useAuthStore()
+const useAuth = useAuthStore()
 const useMeta = useMetaStore()
 
 supabase.auth.onAuthStateChange((event, session) => {
-  auth.setUserInfo(session?.user)
+  useAuth.setUserInfo(session?.user)
 })
 
 router.beforeEach((to, from, next) => {
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
         <RouterView />
       </v-container>
     </v-main>
-    <BottomNavigation v-if="auth.isUser" />
+    <BottomNavigation v-if="useAuth.isUser" />
   </v-app>
 </template>
 

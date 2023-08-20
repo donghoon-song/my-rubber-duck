@@ -12,7 +12,7 @@ const topic = ref('')
 const isLoading = ref(false)
 const chatList = ref<any>([])
 
-const auth = useAuthStore()
+const useAuth = useAuthStore()
 
 onMounted(() => {
   fetchChatList()
@@ -23,7 +23,7 @@ async function fetchChatList() {
     const { data } = await supabase
       .from('chat')
       .select(`id, topic, user_id`)
-      .eq('user_id', auth.getUserInfo.id)
+      .eq('user_id', useAuth.getUserInfo.id)
     chatList.value = data
   } catch (error) {
     console.error(error)
@@ -37,10 +37,10 @@ function handleClickStartNewChatButton() {
 async function handleClickStartChatButton() {
   try {
     startLoading()
-    if (auth.getUserInfo.id === null) {
+    if (useAuth.getUserInfo.id === null) {
       throw new Error('로그인이 필요합니다.')
     }
-    const data: any = await createNewChat(topic.value, auth.getUserInfo.id)
+    const data: any = await createNewChat(topic.value, useAuth.getUserInfo.id)
     const chatId = data?.id
     resetInput()
     closeDialog()

@@ -20,7 +20,7 @@ import TalkLog from '@/components/TalkLog.vue'
 import NoResult from '@/components/NoResult.vue'
 import { useRouter } from 'vue-router'
 
-const auth = useAuthStore()
+const useAuth = useAuthStore()
 const router = useRouter()
 const talkList = ref<Talk[]>([])
 
@@ -30,13 +30,13 @@ onMounted(async () => {
 
 const fetchTalkList = async () => {
   try {
-    if (!auth.getUserInfo) {
+    if (!useAuth.getUserInfo) {
       throw new Error('로그인이 필요합니다.')
     }
     const { data, error } = await supabase
       .from('talk')
       .select('*')
-      .eq('user_id', auth.getUserInfo.id)
+      .eq('user_id', useAuth.getUserInfo.id)
       .order('created_at', { ascending: false })
     if (error) {
       throw error
