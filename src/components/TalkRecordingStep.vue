@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="text-center">
-    <audio-recorder @finish-recording="handleFinishRecording" />
+    <audio-recorder @finish-recording="handleFinishRecording" @exit-talk="$emit('exit-talk')" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ defineProps<{
   topic: string
 }>()
 
-const emit = defineEmits(['finish-talk'])
+const emit = defineEmits(['finish-talk', 'exit-talk'])
 
 const handleFinishRecording = (data: { duration: number }) => {
   emit('finish-talk', data)

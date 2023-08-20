@@ -37,7 +37,7 @@
         </button>
         <button
           class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
-          @click="handleClickFinishButton"
+          @click="handleClickExitButton"
         >
           종료하기
         </button>
@@ -175,6 +175,9 @@ export default {
       this.$emit('finish-recording', {
         duration: durationToSeconds(recordList[0].duration)
       })
+    },
+    handleClickExitButton() {
+      this.$emit('exit-talk')
     }
   }
 }
