@@ -8,7 +8,7 @@
         {{ talk.topic }}에 대해 {{ durationMinutes }} {{ durationSeconds }}동안 설명했어요!
       </p>
       <div class="text-xs text-right">
-        {{ formatTime(talk.created_at, 'YYYY-MM-DD hh:mm') }}
+        {{ formatTime(talk.created_at, 'YYYY-MM-DD HH:mm') }}
       </div>
     </div>
   </div>
