@@ -11,8 +11,6 @@ const router = useRouter()
 const auth = useAuthStore()
 const useMeta = useMetaStore()
 
-const { isUser } = auth
-
 supabase.auth.onAuthStateChange((event, session) => {
   auth.setUserInfo(session?.user)
 })
@@ -39,7 +37,7 @@ router.beforeEach((to, from, next) => {
         <RouterView />
       </v-container>
     </v-main>
-    <BottomNavigation v-if="isUser" />
+    <BottomNavigation v-if="auth.isUser" />
   </v-app>
 </template>
 
