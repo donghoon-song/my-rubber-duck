@@ -21,7 +21,11 @@
           </button>
         </template>
         <template v-else-if="step === 2">
-          <talk-recording-step :topic="topic" @finish-talk="handleFinishTalk" />
+          <talk-recording-step
+            :topic="topic"
+            @finish-talk="handleFinishTalk"
+            @exit-talk="handleExitTalk"
+          />
         </template>
       </div>
     </v-col>
@@ -71,6 +75,10 @@ function reset() {
 
 async function handleFinishTalk(recordData: { duration: number }) {
   await handleUploadTalk(recordData)
+  reset()
+}
+
+const handleExitTalk = () => {
   reset()
 }
 

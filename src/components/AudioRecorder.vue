@@ -19,16 +19,15 @@
       </template>
       <template v-else>
         <!-- 녹음 후 -->
-        <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
-          사용하시는 브라우저가
-          <code>audio</code> element 요소를 지원하지 않습니다.
-        </audio>
         <div class="min-h-12 text-lg break-keep">
           <div>{{ successMessage }}</div>
           <div>{{ instructionMessage }}</div>
           <div class="text-red-600">{{ errorMessage }}</div>
         </div>
-        <v-alert type="info"> 녹음한 소리는 저장하지 않아요. </v-alert>
+        <audio controls :src="recordedAudio" type="audio/mpeg" class="mx-auto">
+          사용하시는 브라우저가
+          <code>audio</code> element 요소를 지원하지 않습니다.
+        </audio>
         <button
           class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
           @click="finishRecording"
@@ -37,7 +36,7 @@
         </button>
         <button
           class="bg-black hover:bg-gray-500 text-white font-bold py-4 rounded-full px-8 mt-4 w-full"
-          @click="handleClickFinishButton"
+          @click="handleClickExitButton"
         >
           종료하기
         </button>
@@ -57,7 +56,8 @@ const INSTRUCTION_MESSAGE = '학습을 시작하려면 녹음 버튼을 누르�
 const INSTRUCTION_MESSAGE_STOP = '학습을 끝내려면 정지 버튼을 누르세요.'
 const ERROR_MESSAGE =
   '마이크 사용권한이 없습니다. 새로고침 후 다시 시도하시거나 마이크 사용권한을 허용해주세요.'
-const SUCCESS_MESSAGE = '녹음이 완료되었어요. 다시 들어보셔도 좋아요.'
+const SUCCESS_MESSAGE =
+  '녹음이 완료되었어요. 다시 들어보셔도 좋아요. 녹음한 소리는 저장되지 않아요.'
 const SUCCESS_MESSAGE_SUBMIT = 'Successfully submitted audio message! Thank you!'
 const ERROR_SUBMITTING_MESSAGE = 'Error submitting audio message! Please try again later.'
 
@@ -175,6 +175,9 @@ export default {
       this.$emit('finish-recording', {
         duration: durationToSeconds(recordList[0].duration)
       })
+    },
+    handleClickExitButton() {
+      this.$emit('exit-talk')
     }
   }
 }
