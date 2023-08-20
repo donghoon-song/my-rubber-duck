@@ -2,7 +2,11 @@
   <v-row>
     <v-col :cols="12">
       <div class="w-full flex flex-col items-center">
-        <img class="w-[70%]" :src="IMAGE_URL.RUBBER_DUCK_PIXEL" alt="main-rubber-duck image" />
+        <img
+          class="w-[80%] mb-4"
+          :src="IMAGE_URL.RUBBER_DUCK_TALK_TO_ME"
+          alt="main-rubber-duck image"
+        />
         <template v-if="step === 1">
           <v-text-field
             v-model="topic"
