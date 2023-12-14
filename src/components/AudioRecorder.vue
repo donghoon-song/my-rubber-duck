@@ -1,22 +1,7 @@
 <template>
-  <!-- TODO: 컴포넌트 분리 -->
-  <div class="text-center w-full mx-auto rounded-lg">
-    <div class="mb-3">
-      <template v-if="!recordedAudio">
-        <!-- 녹음 전 -->
-        <template v-if="!recording">
-          <v-btn icon="mdi-microphone" size="x-large" @click="toggleRecording"> </v-btn>
-        </template>
-        <!-- 녹음 중 -->
-        <template v-if="recording">
-          <div class="flex flex-col items-center">
-            <v-btn icon="mdi-stop" size="x-large" class="mb-4" @click="toggleRecording"> </v-btn>
-            <div class="text-2xl">
-              {{ recordedTime }}
-            </div>
-          </div>
-        </template>
-      </template>
+  <RecordingControls :after-recording="afterRecording" :backend-endpoint="backendEndpoint" />
+  <AudioPlayer v-if="recordedAudio" :src="recordedAudio" />
+  <RecordingMessages :success-message="successMessage" :error-message="errorMessage" />
       <template v-else>
         <!-- 녹음 후 -->
         <div class="min-h-12 text-lg break-keep">
@@ -47,7 +32,9 @@
 
 // TODO: js파일 ts로 변경
 <script>
-import Recorder from '../lib/Recorder'
+import RecordingControls from './RecordingControls.vue'
+import AudioPlayer from './AudioPlayer.vue'
+import RecordingMessages from './RecordingMessages.vue'
 import { convertTimeMMSS } from '@/utils/time'
 import { IMAGE_URL } from '@/utils/constants/image.js'
 import { durationToSeconds } from '@/utils/time'
@@ -79,12 +66,8 @@ export default {
   },
   data() {
     return {
-      recording: false,
-      recordedAudio: null,
-      recordedBlob: null,
-      recorder: null,
-      successMessage: null,
-      errorMessage: null,
+      successMessage: '',
+      errorMessage: '',
       instructionMessage: INSTRUCTION_MESSAGE
     }
   },
@@ -105,28 +88,12 @@ export default {
     }
   },
   methods: {
-    toggleRecording() {
-      this.recording = !this.recording
-      if (this.recording) {
-        this.initRecorder()
-      } else {
-        this.stopRecording()
-      }
-    },
-    initRecorder() {
-      this.recorder = new Recorder({
-        micFailed: this.micFailed,
-        bitRate: this.bitRate,
-        sampleRate: this.sampleRate
-      })
-      this.recorder.start()
+    // toggleRecording and initRecorder methods have been moved to RecordingControls component.
       this.successMessage = null
       this.errorMessage = null
       this.instructionMessage = INSTRUCTION_MESSAGE_STOP
     },
-    stopRecording() {
-      this.recorder.stop()
-      const recordList = this.recorder.recordList()
+    // The stopRecording logic is handled by RecordingControls component.
       this.recordedAudio = recordList[0].url
       this.recordedBlob = recordList[0].blob
       if (this.recordedAudio) {
@@ -170,12 +137,7 @@ export default {
       this.instructionMessage = INSTRUCTION_MESSAGE
       this.errorMessage = ERROR_MESSAGE
     },
-    finishRecording() {
-      const recordList = this.recorder.recordList()
-      this.$emit('finish-recording', {
-        duration: durationToSeconds(recordList[0].duration)
-      })
-    },
+    // The finishRecording method now may be unnecessary. Check if it needs to be here or handled by the new components.
     handleClickExitButton() {
       this.$emit('exit-talk')
     }
